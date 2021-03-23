@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="--top-bar-background:#00848e; --top-bar-background-lighter:#1d9ba4; --top-bar-color:#f9fafb; --p-frame-offset:0px;">
+    <form method="post" enctype="multipart/form-data" action="upload_data">
+      {% csrf_token %}
+    <div class="Polaris-Page">
+        <!-- <h4 id="popupbar" style="display: none;"> Successful</h4>
+        <h4 id="reject" style="display:none;">Reject</h4> -->
+        <div class="Polaris-Page-Header Polaris-Page-Header--separator Polaris-Page-Header--hasNavigation Polaris-Page-Header--hasActionMenu Polaris-Page-Header--mediumTitle">
+
+            <!-- Layout -->
+
+            <div class="Polaris-Layout">
+                <div class="Polaris-Layout__Section">
+                    <div class="Polaris-Card">
+                        <div class="Polaris-Card__Header">
+                            <h2 class="Polaris-Heading"></h2>
+                        </div>
+                        <!-- Text heading section start -->
+                        <div class="Polaris-Card__Section">
+                            <!-- Text field 1 -->
+                            <div style="--top-bar-background:#00848e; --top-bar-background-lighter:#1d9ba4; --top-bar-color:#f9fafb; --p-frame-offset:0px;">
+                                <div class="">
+                                    <div class="Polaris-Labelled__LabelWrapper">
+                                        <div class="Polaris-Label"><label id="PolarisTextField2Label"
+                                                for="PolarisTextField2" class="Polaris-Label__Text">store
+                                                logo</label></div>
+                                    </div>
+                                    <div class="Polaris-Labelled--hidden">
+                                        <div class="Polaris-Labelled__LabelWrapper">
+                                            <div class="Polaris-Label"><label id="PolarisDropZone2Label"
+                                                    for="PolarisDropZone2" class="Polaris-Label__Text">Upload
+                                                    file</label></div>
+                                        </div>
+                                        <div class="Polaris-DropZone Polaris-DropZone--hasOutline Polaris-DropZone--sizeExtraLarge"
+                                            aria-disabled="false">
+                                            <div class="Polaris-DropZone__Container">
+                                                <div class="Polaris-DropZone-FileUpload">
+                                                    <div class="Polaris-Stack Polaris-Stack--vertical">
+                                                        <div class="Polaris-Stack__Item"><img width="40"
+                                                                src="data:image/svg+xml,%3csvg fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill-rule='evenodd' clip-rule='evenodd' d='M20 10a10 10 0 11-20 0 10 10 0 0120 0zM5.3 8.3l4-4a1 1 0 011.4 0l4 4a1 1 0 01-1.4 1.4L11 7.4V15a1 1 0 11-2 0V7.4L6.7 9.7a1 1 0 01-1.4-1.4z' fill='%235C5F62'/%3e%3c/svg%3e"
+                                                                alt=""></div>
+                                                        <div class="Polaris-Stack__Item">
+                                                            <input type = "file" placeholder = "Picture" name = "myfile" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><span class="Polaris-VisuallyHidden"><input id="PolarisDropZone2"
+                                                    type="file" multiple="" autocomplete="off"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="PolarisPortalsContainer"></div>
+                            </div>
+                            <p>&nbsp;</p>
+                            <!-- Text field 2 -->
+                            <div style="--top-bar-background:#00848e; --top-bar-background-lighter:#1d9ba4; --top-bar-color:#f9fafb; --p-frame-offset:0px;">
+                                <div class="">
+                                    <div class="Polaris-Labelled__LabelWrapper">
+                                        <div class="Polaris-Label"><label id="PolarisTextField2Label"
+                                                for="PolarisTextField2" class="Polaris-Label__Text">store
+                                                address</label></div>
+                                    </div>
+                                    <div class="Polaris-Connected">
+                                        <div class="Polaris-Connected__Item Polaris-Connected__Item--primary">
+                                            <div class="Polaris-TextField Polaris-TextField--hasValue"><input
+                                                    id="PolarisTextField2" class="Polaris-TextField__Input"
+                                                    aria-labelledby="PolarisTextField2Label" name="store_address" aria-invalid="false"
+                                                    aria-multiline="false" value="">
+                                                <div class="Polaris-TextField__Backdrop"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="PolarisPortalsContainer"></div>
+                            </div>
+                            <p>&nbsp;</p>
+                            <!-- Text field 3 -->
+                            <div style="--top-bar-background:#00848e; --top-bar-background-lighter:#1d9ba4; --top-bar-color:#f9fafb; --p-frame-offset:0px;">
+                                <div class="">
+                                    <div class="Polaris-Labelled__LabelWrapper">
+                                        <div class="Polaris-Label"><label id="PolarisTextField2Label"
+                                                for="PolarisTextField2" class="Polaris-Label__Text">store
+                                                email</label></div>
+                                    </div>
+                                    <div class="Polaris-Connected">
+                                        <div class="Polaris-Connected__Item Polaris-Connected__Item--primary">
+                                            <div class="Polaris-TextField Polaris-TextField--hasValue"><input
+                                                    id="PolarisTextField2" class="Polaris-TextField__Input"
+                                                    aria-labelledby="PolarisTextField2Label" aria-invalid="false"
+                                                    aria-multiline="false" value="" name="store_email">
+                                                <div class="Polaris-TextField__Backdrop"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="PolarisPortalsContainer"></div>
+                            </div>
+
+
+                            <!-- Footer Heading -->
+                            <p>&nbsp;</p>
+                            <!-- Button -->
+                            <button class="Polaris-Button Polaris-Button--primary" type="submit" ><span
+                                    class="Polaris-Button__Content"><span
+                                        class="Polaris-Button__Text">submit</span></span></button>
+
+                            <!-- <button class="Polaris-Button Polaris-Button--plain" type="button">
+                                <span class="Polaris-Button__Content">
+                                    <span class="Polaris-Button__Text">Reject</span></span></button> -->
+                        </div> <!-- Text Heading section end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </form>
+  </div>
+
+  <!-- <script>
+    function approve(){
+        var show = document.getElementById("popupbar"); onclick="approve()"
+        if(show.style.display == "none"){
+            show.style.display="block"
+        }else{
+            show.style.display="none";
+        }
+    }
+  </script>
+  <script>
+            function reject(){
+        var cancle = document.getElementById("reject");  onclick="reject()"
+        if(cancle.style.display == "none"){
+            cancle.style.display ="block"
+        }else{
+            cancle.style.display="none"
+        }
+    }
+  </script> -->
+{% endblock %}
