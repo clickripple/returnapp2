@@ -695,7 +695,8 @@ function operation_call(calltype,orderid,id,quantity,notes,variant,r_id,r_quanti
    
    console.log($(this).closest('form').length);
    console.log(calltype);
-   $.getJSON("https://6developer3i.pagekite.me/return_"+calltype,{orderid:orderid,id:id,quantity:quantity,notes:notes,note:note, vari:variant},  function(data){ 
+   $('.psar_loader').addClass('active');
+   $.getJSON("https://python.penveel.com/return_"+calltype,{orderid:orderid,id:id,quantity:quantity,notes:notes,note:note, vari:variant},  function(data){ 
       if(data.error_message){
          $('#request_error_'+oid).removeClass('hidden');
          $('#error_message_'+oid).text(data.error_message);
@@ -723,6 +724,7 @@ function operation_call(calltype,orderid,id,quantity,notes,variant,r_id,r_quanti
             $('#error_message_'+oid).text(data.error_message);
          }
       }
+      $('.psar_loader').removeClass('active');
    });   
 }
    

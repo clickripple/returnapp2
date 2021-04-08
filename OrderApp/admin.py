@@ -1,9 +1,13 @@
 from django.contrib import admin
-from .models import about_data, Policy_data, Homedata, thank_you, data_admin
+from .models import about_data, Policy_data, Homedata, thank_you, data_admin, plan
 from django_dynamic_resource_admin.admin import DjangoDynamicResourceAdmin
 from django.views.decorators.csrf import csrf_exempt
 import django.contrib.admin.options as admin_opt
 
+
+# plan #
+admin.site.register(plan)
+# end plan #
 
 # SuperAdmin about page code start (To add data in about page) #
 admin.site.register(about_data)

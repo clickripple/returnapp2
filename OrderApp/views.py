@@ -4,18 +4,23 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 import requests
 import datetime
 import shopify as shopifyapi
-from .models import installer, about_data, Policy_data, Homedata
+from .models import installer, about_data, Policy_data, Homedata, Relations_Plan_Shop, plan as p, plan_charges
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 import json
 # from django.conf.urls.static import settings
 from django.db.models import Q
 from django.shortcuts import redirect as redc
 
-API_KEY = "8444dc202d58790ecb461d128a8a2b86"
-SHARED_SECRET = "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"
-API_VERSION = "2020-07"
+from django.views import View
+
+from .billingapi import BillingAPI
+
+API_KEY = "1c86866d8c638b28da99bbdfe3cd5fce"
+SHARED_SECRET = "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"
+API_VERSION = "2021-01"
 
 shop = ""
+get_tkn = ""
 
 # login page view functional code start (display template while go to main page) #
 def login(request):
@@ -517,7 +522,7 @@ def installation(request):
     
         api_key = API_KEY
         
-        link = '%s/admin/oauth/authorize?client_id=%s&redirect_uri=https://6developer3i.pagekite.me/final&scope=read_products,write_products,read_customers,write_customers,read_orders,write_orders,read_themes,write_themes,write_content,read_content,write_script_tags,read_script_tags' % (s_url, api_key)
+        link = '%s/admin/oauth/authorize?client_id=%s&redirect_uri=https://python.penveel.com/final&scope=read_products,read_inventory,write_products,read_customers,write_customers,read_orders,write_orders,read_themes,write_themes,write_content,read_content,write_script_tags,read_script_tags' % (s_url, api_key)
         
         li = link.strip("/")
        
@@ -530,7 +535,7 @@ def installation(request):
 def redirect(request):
     if request.GET.get('shop') is not None:     # check request data is not none #
         shop = request.GET.get('shop')
-        redir = HttpResponseRedirect(redirect_to='https://' + shop + '/admin/apps/returnmagic-1')
+        redir = HttpResponseRedirect(redirect_to='https://' + shop + '/admin/apps/productreturn')
     return redir
 # redirect to app fucntional code end #
 
@@ -557,7 +562,7 @@ def unistaller_second(request):
         my = {
             "webhook": {
                 "topic": "app/uninstalled",
-                "address": 'https://6developer3i.pagekite.me/uninstall',  # uninstall process data send on the address #
+                "address": 'https://python.penveel.com/uninstall',  # uninstall process data send on the address #
                 "format": "json"
             }
         }
@@ -575,6 +580,13 @@ def final(request):
         hmac = request.GET.get('hmac')
         global shop
         shop = request.GET.get('shop')
+
+        charge_id = request.GET.get('charge_id')
+        if charge_id is not None and charge_id != "":
+            plan_charges.objects.filter(application_charge_id=charge_id).update(status="active")
+        else:
+            pass
+
         if request.GET.get('code') is not None:     # check code is not none #
             code = request.GET.get('code')
             if len(code) != 0:              # check length of code #
@@ -607,6 +619,8 @@ def final(request):
             if record:
                 getaccess = record[0].access_token
                 getshop = record[0].shop
+                global get_tkn
+                get_tkn = getaccess
                 return render(request, 'final.html')
             else:
                 return HttpResponse("No Data Found")
@@ -632,7 +646,7 @@ def data_upload(request):
         dta_installer = installer.objects.filter(shop=sh)        # filter installer data by shop #   
         if dta_installer:
             vendor_id = dta_installer[0].id
-            fs = FileSystemStorage('var/www/html/media/' + str(vendor_id))      # filesystemstorage path to upload image #
+            fs = FileSystemStorage('media/' + str(vendor_id))      # filesystemstorage path to upload image #   var/www/html/
             filename = fs.save(myfil.name, myfil)
             uploaded_file_url = fs.url(str(vendor_id) +"/"+ filename)
             address = request.POST['store_address']
@@ -645,13 +659,13 @@ def data_upload(request):
                 image_list = imagedata.split('/')
                 imagename = image_list[1]
                 if thank_id:
-                    data_image = uploaded_file_url.strip('var/www/html/media/') 
-                    fs.delete(imagename)        # delete old image from folder #
+                    data_image = uploaded_file_url.strip('media/') 
+                    fs.delete(imagename)        # delete old image from folder #    var/www/html/
                     # update record with new image file and data in 'thank_you' table #
                     data_thanks2 = thank_you.objects.filter(Q(id=str(thank_id))).update(shop_name=sh, logo_upload=data_image, email_id=email, ven_address=address)
             else:
-                data_image = uploaded_file_url.strip('var/www/html/media/')
-                # create new record in 'thank_you' table # 
+                data_image = uploaded_file_url.strip('media/')
+                # create new record in 'thank_you' table #  var/www/html/
                 thank_data = thank_you.objects.create(shop_name=sh, logo_upload=data_image, email_id=email, ven_address=address)
         else:
             message = "no vendor found"
@@ -697,7 +711,7 @@ def install_page(request):
                 return HttpResponse(json.dumps(my_dict), content_type="application/json")
 
             Assets.create_css(theme_id=data_theme_id, store=store_data, token=token)
-            Assets.create_sjs(theme_id=data_theme_id, store=store_data, token=token)
+            # Assets.create_sjs(theme_id=data_theme_id, store=store_data, token=token)
         else:
             message = "No theme found in store"
             my_dict['error_message'] = message
@@ -708,3 +722,91 @@ def install_page(request):
         my_dict['error_message'] = message
         return HttpResponse(json.dumps(my_dict), content_type="application/json")
 # ScriptTag API Functional Code end #
+
+# pricing page 'view' functional code start #
+@xframe_options_exempt
+@csrf_exempt
+def pricing(request):
+    plan_id = ''
+    p_name = ''
+    my_dict = dict()
+    if request.method == "POST":  
+        plan = request.POST['plan']
+        if plan == "Freemium":
+            check_store = installer.objects.filter(shop=shop)
+            if check_store:
+                plan_id = p.objects.get(plan_name=plan).id
+                
+                relation_stp_data = Relations_Plan_Shop.objects.create(plan_id_id=int(plan_id), shop_id_id=int(check_store[0].id))
+                
+                charges_detail = BillingAPI.recurring_application_charges(shop_data=shop, token=get_tkn)
+                if len(charges_detail) > 0:
+                    recurring_id = charges_detail["recurring_application_charge"]["id"]
+                    recurring_price = charges_detail["recurring_application_charge"]["price"]
+                    recurring_status = charges_detail["recurring_application_charge"]["status"]
+                    recurring_confim = charges_detail["recurring_application_charge"]["confirmation_url"]
+                    shop_id_data = installer.objects.get(shop=shop).id
+                    plan_id_data = Relations_Plan_Shop.objects.get(shop_id_id=shop_id_data).plan_id_id
+                    
+                    from .models import plan_charges
+                    plan_charges.objects.create(application_charge_id=recurring_id, price=recurring_price, status=recurring_status, confirmation_url=recurring_confim, shop_id_id=shop_id_data, plan_id_id=plan_id_data)
+                    my_dict['url'] = recurring_confim
+                    return HttpResponse(json.dumps(my_dict), content_type="application/json")
+                else:
+                    recurring_confim = ' '
+                    return render(request, 'price.html', {'url': recurring_confim})
+            else:
+                message = "No store data found"
+                my_dict['error_message'] = message
+                return HttpResponse(json.dumps(my_dict), content_type="application/json")
+        else:
+            pass
+    else:
+        name = ''
+
+        from .models import plan
+        data = plan.objects.all()
+
+        sh_data = installer.objects.filter(shop=shop)
+        if sh_data:
+            sh_id = sh_data[0].id
+            pln_data = Relations_Plan_Shop.objects.filter(shop_id=sh_id)
+            if pln_data:
+                p_id = pln_data[0].plan_id_id
+                p_data = p.objects.get(id=p_id).plan_name
+                if p_data:
+                    name = p_data
+                else:
+                    name = ''
+            else:
+               pass
+        else:
+            message = "No store data found"
+            my_dict['error_message'] = message
+            return HttpResponse(json.dumps(my_dict), content_type="application/json") 
+
+        return render(request, 'price.html', {'data': data, 'p_name': name})
+
+def Transactions(request):
+    my_dict = dict()
+    if request.method == "GET":
+        get_store_data = installer.objects.get(shop=shop)
+        if get_store_data:
+            store_token = get_store_data.access_token
+            store_rec_id = plan_charges.objects.get(shop_id_id=get_store_data.id).application_charge_id
+            if store_rec_id:
+                Charges_Detail = BillingAPI.get_usages_charges(shop_data=shop, token=store_token, ruc_id=store_rec_id)
+                if len(Charges_Detail) > 0:
+                    
+                    return render(request, 'charges.html', {'data': Charges_Detail})
+                else:
+                    Charges_Detail = ''
+                    return render(request, 'charges.html', {'data': Charges_Detail})
+            else:
+                message = "no plan selected yet"
+                my_dict['error_message'] = message
+                return HttpResponse(json.dumps(my_dict), content_type="application/json")
+        else:
+            message = "No store data found"
+            my_dict['error_message'] = message
+            return HttpResponse(json.dumps(my_dict), content_type="application/json")

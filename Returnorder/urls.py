@@ -17,17 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from django.views.static import serve
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static, settings
 
 urlpatterns = [
     path('project_admin/', admin.site.urls),    #https://pragneshwork.pagekite.me/project_admin/
     path('', include('OrderApp.urls')),
-    # url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
-
-if settings.DEBUG == "False":
-    # static files (images, css, javascript, etc.)
-    urlpatterns += patterns('media',(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}))

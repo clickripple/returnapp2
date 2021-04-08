@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%uc^(mcn-$xp7^8amb!n-uc2_+hr%rb-+3u=w9x@9190nqe23^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     'django_dynamic_resource_admin',
     'mathfilters',
     'cryptographic_fields',
+    'django_cron',
+    "verify_email",
 ]
 
 MIDDLEWARE = [
@@ -59,9 +62,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
 ]
 
-
+CRON_CLASSES = [
+    'OrderApp.cron.MyCronJob',
+]
 
 ROOT_URLCONF = 'Returnorder.urls'
 
@@ -94,9 +100,9 @@ WSGI_APPLICATION = 'Returnorder.wsgi.application'
 DATABASES = {
     'default': dict(
         ENGINE='django.db.backends.mysql',
-        NAME='returnmagic_db',
-        USER='root',
-        PASSWORD='pragnesh#123',
+        NAME='shopifyapp',
+        USER='python',
+        PASSWORD='lenovo#2020HI',
         HOST='localhost',
         PORT='3306',
         auth_plugin='mysql_native_password')
@@ -135,7 +141,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+# fixed_size = 3
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -150,9 +156,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-# API_KEY = "8444dc202d58790ecb461d128a8a2b86"
-# SHARED_SECRET = "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"
-# API_VERSION = "2020-07"
-
-# passed_url = "6developer3i.pagekite.me"
+# EMAIL VARIFICATION DECLARATIONS #
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER') 
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER')

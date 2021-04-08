@@ -10,9 +10,9 @@ import datetime
 import os
 
 
-API_KEY = "8444dc202d58790ecb461d128a8a2b86"
-SHARED_SECRET = "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"
-API_VERSION = "2020-07"
+API_KEY = "1c86866d8c638b28da99bbdfe3cd5fce"
+SHARED_SECRET = "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"
+API_VERSION = "2021-01"
 
 # encrypt data functional start (uninstall app then save the uninstall time data in encrypted format)  #
 def encrypt(data_json):
@@ -30,7 +30,6 @@ def ras_uninstall_webhook(ras_shop, ras_json_data, ras_date):
 
     if r_data.status_code == 200:
         c = json.loads(r_data.text)
-        print(c)
         return HttpResponse(json.dumps(c), content_type="application/json")
     else:
         return HttpResponse('no data gether')
@@ -89,9 +88,7 @@ class WebhookApi(object):
                             if thanks_detail:       # fetch record from 'thank_you' table #
                                 thanks_detail.delete()      # delete that records from 'thank_you' table #
                             else:
-                                return HttpResponse("NO data found")
-
-                            
+                                return HttpResponse("NO data found")    
                     else:
                         return HttpResponse("NO shop domain")
                 else:

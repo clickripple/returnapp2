@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if data|length > 0 %}
+  <div>
+    <div class="Polaris-Page">
+      <div class="Polaris-Page-Header Polaris-Page-Header--isSingleRow Polaris-Page-Header--mobileView Polaris-Page-Header--noBreadcrumbs Polaris-Page-Header--mediumTitle">
+        <div class="Polaris-Page-Header__Row">
+          <div class="Polaris-Page-Header__TitleWrapper">
+            <div>
+              <div class="Polaris-Header-Title__TitleAndSubtitleWrapper">
+                <h1 class="Polaris-Header-Title">Usage Charges Detail</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Polaris-Page__Content">
+        <div class="Polaris-Card">
+          <div class="">
+            <div class="Polaris-DataTable__Navigation"><button class="Polaris-Button Polaris-Button--disabled Polaris-Button--plain Polaris-Button--iconOnly" aria-label="Scroll table left one column" type="button" disabled=""><span class="Polaris-Button__Content"><span class="Polaris-Button__Icon"><span class="Polaris-Icon"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg" focusable="false" aria-hidden="true">
+                        <path d="M12 16a.997.997 0 0 1-.707-.293l-5-5a.999.999 0 0 1 0-1.414l5-5a.999.999 0 1 1 1.414 1.414L8.414 10l4.293 4.293A.999.999 0 0 1 12 16z"></path>
+                      </svg></span></span></span></button><button class="Polaris-Button Polaris-Button--plain Polaris-Button--iconOnly" aria-label="Scroll table right one column" type="button"><span class="Polaris-Button__Content"><span class="Polaris-Button__Icon"><span class="Polaris-Icon"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg" focusable="false" aria-hidden="true">
+                        <path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path>
+                      </svg></span></span></span></button></div>
+            <div class="Polaris-DataTable">
+              <div class="Polaris-DataTable__ScrollContainer">
+                <table class="Polaris-DataTable__Table">
+                  <thead>
+                    <tr>
+                      <th data-polaris-header-cell="true" class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric" scope="col" style="text-align: left;">Description</th>
+                      <th data-polaris-header-cell="true" class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--firstColumn Polaris-DataTable__Cell--header" scope="col">Id</th>
+                      <th data-polaris-header-cell="true" class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric" scope="col">Price</th>
+                      <th data-polaris-header-cell="true" class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric" scope="col">Created_at</th>
+                      <th data-polaris-header-cell="true" class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric" scope="col">Billing_on</th>
+                      <th data-polaris-header-cell="true" class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric" scope="col">Balance_used</th>
+                      <th data-polaris-header-cell="true" class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric" scope="col">Balance_remaining</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for x in data.usage_charges %}
+                    <tr class="Polaris-DataTable__TableRow">
+                      <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--firstColumn" scope="row">{{ x.description }}</th>
+                      <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--numeric">{{ x.id }}</td>
+                      <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--numeric">$ {{ x.price }}</td>
+                      <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--numeric">{{ x.created_at }}</td>
+                      <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--numeric">{{ x.billing_on }}</td>
+                      <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--numeric">$ {{ x.balance_used }}</td>
+                      <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--verticalAlignTop Polaris-DataTable__Cell--numeric">$ {{ x.balance_remaining }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  {% else %}
+    <div style="display:block">
+      <div style="--top-bar-background:#00848e; --top-bar-background-lighter:#1d9ba4; --top-bar-color:#f9fafb; --p-frame-offset:0px;">
+      <div class="Polaris-EmptyState Polaris-EmptyState--withinPage">
+        <div class="Polaris-EmptyState__Section">
+          <div class="Polaris-EmptyState__DetailsContainer">
+            <div class="Polaris-EmptyState__Details">
+              <div class="Polaris-TextContainer">
+                <p class="Polaris-DisplayText Polaris-DisplayText--sizeMedium">Plans are not available</p>
+                <div class="Polaris-EmptyState__Content">
+                </div>
+              </div>
+              <div class="Polaris-EmptyState__Actions">
+                <div class="Polaris-Stack Polaris-Stack--alignmentCenter">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="Polaris-EmptyState__ImageContainer"><img src="https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg" role="presentation" alt="" class="Polaris-EmptyState__Image"></div>
+        </div>
+      </div>
+      <div id="PolarisPortalsContainer"></div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

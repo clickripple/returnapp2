@@ -1,0 +1,742 @@
+/* Main Page */
+.psar_returnpage .psar-main{
+  text-align: center;
+}
+
+/* Order */
+.psar_returnpage .psar-main .psar-order{
+  width: 80%;
+}
+
+/* Email */
+.psar_returnpage .psar-main .psar-email{
+  width:80%;
+  margin-top:10px;
+  margin-bottom:10px
+}
+
+/* Button login page */
+.psar-button-login{
+  margin-bottom:10px;
+  background:red;
+}
+.psar_returnpage .psar-main .psar-button-login{
+  background-color:#acacac; 
+  padding:10px; 
+  border-radius: 5px; 
+  color:#fff
+}
+
+
+/* Card */
+
+.psar_returnpage .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /*   max-width: 300px; */
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.psar_returnpage .price {
+  color: grey;
+  font-size: 22px;
+}
+
+.psar_returnpage .card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.psar_returnpage .card button:hover {
+  opacity: 0.7;
+}
+
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+  position: relative; /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none; /* opinion 2 */
+  font-size: 0.9em; /* opinion 3 */
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+
+[tooltip]::before {
+  content: "";
+  border: 5px solid transparent; /* opinion 4 */
+  z-index: 1001; /* absurdity 1 */
+}
+
+[tooltip]::after {
+  content: attr(tooltip); /* magic! */
+
+  /* most of the rest of this is opinion */
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+
+  /* 
+  Let the content set the size of the tooltips 
+  but this will also keep them from being obnoxious
+  */
+  min-width: 3em;
+  max-width: 21em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: 0.3ch;
+  box-shadow: 0 1em 2em -0.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000; /* absurdity 2 */
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip=""]::before,
+[tooltip=""]::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -0.5em);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: 0.9;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: 0.9;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+/* UNRELATED to tooltips */
+.psar_returnpage body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  background: #ededed;
+}
+.psar_returnpage main {
+  flex: 1 1 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.psar_returnpage aside {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #49b293;
+  color: #fff;
+  padding: 1em;
+}
+.psar_returnpage aside a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0.4em 1em;
+}
+[tooltip] {
+  position: relative; /* opinion 1 */
+}
+
+[tooltip]::before,
+[tooltip]::after{
+  text-transform: none; /* opinion 2 */
+  font-size: .9em; /* opinion 3 */
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0; 
+}
+
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent; /* opinion 4 */
+  z-index: 1001; /* absurdity 1 */
+}
+
+[tooltip]::after {
+  content: attr(tooltip); /* magic! */
+
+  /* most of the rest of this is opinion */
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+
+  /* 
+  Let the content set the size of the tooltips 
+  but this will also keep them from being obnoxious
+  */
+  min-width: 3em;
+  max-width: 21em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: 0.3ch;
+  box-shadow: 0 1em 2em -0.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000; /* absurdity 2 */
+}
+
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+
+/* don't show empty tooltips */
+[tooltip=""]::before,
+[tooltip=""]::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -0.5em);
+}
+
+/* Tooltip icon */
+.psar_returnpage .psar_iconbar {
+    width: 50px;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    display: inline-block;
+}
+
+/* Table css */
+
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0378/8826/2283/t/3/assets/timber.scss.css?v=7282288891484717481 ; media=all */
+@media all {
+  .psar_returnpage table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  .psar_returnpage .table-wrap {
+    max-width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .psar_returnpage .psar_table-wrap--order {
+    background-color: #f6f6f6;
+    padding: 1rem;
+  }
+  th {
+    font-weight: 700;
+  }
+  .psar_text-left_th,
+  .psar_returnpage td {
+    text-align: left;
+    padding: 15px;
+    border: 1px solid #1f2021;
+
+  }
+  .psar_text-right {
+    text-align: right!important;
+
+  }
+  .psar_returnpage a {
+    color: #a56600;
+    text-decoration: none;
+    background: transparent;
+  }
+  .psar_returnpage a:hover {
+    color: #1f2021;
+  }
+  .psar_returnpage .table-wrap {
+    max-width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0378/8826/2283/t/3/assets/theme.scss.css?v=5585108216513130919 ; media=all */
+
+@media all {
+  .psar_returnpage table {
+    position: relative;
+    border: 0 none;
+    background-color: #f6f6f6;
+  }
+  .psar_returnpage td,
+  .psar_returnpage th {
+    border: 0 none;
+  }
+  .psar_returnpage td {
+    padding: 10px 15px;
+  }
+  .psar_returnpage tr:first-child th,
+  .psar_returnpage tr:first-child td {
+    position: relative;
+  }
+  thead tr:first-child th:after,
+  thead tr:first-child td:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: -15px;
+    right: 15px;
+    border-bottom: 1px solid #1f2021;
+  }
+  .psar_returnpage tr:first-child th:first-child:after {
+    left: 15px;
+    right: -15px;
+  }
+  @media screen and (max-width: 590px) {
+    .psar_returnpage .table--small-hide {
+      display: none!important;
+    }
+  }
+  .psar_returnpage th {
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8125em;
+    letter-spacing: 0.15em;
+  }
+  ::-webkit-input-placeholder {
+    color: #1f2021;
+    opacity: 0.6;
+  }
+  :-moz-placeholder {
+    color: #1f2021;
+    opacity: 0.6;
+  }
+  :-ms-input-placeholder {
+    color: #1f2021;
+    opacity: 0.6;
+  }
+  ::-ms-input-placeholder {
+    color: #1f2021;
+    opacity: 1;
+  }
+  a {
+    color: #1f2021;
+    text-decoration: none;
+    background: transparent;
+  }
+  a:hover {
+    color: #1f2021;
+  }
+  .psar_returnpage .order-table thead {
+    border-bottom: 1px solid #1f2021;
+  }
+  .psar_returnpage .order-table tfoot {
+    border-top: 1px solid #1f2021;
+  }
+  .psar_returnpage .order-table tfoot tr:first-child th,
+  .psar_returnpage .order-table tfoot tr:first-child td {
+    padding-top: 1.5em;
+  }
+  .psar_returnpage .order-table tfoot tr:nth-last-child(2) th,
+  .psar_returnpage .order-table tfoot tr:nth-last-child(2) td {
+    padding-bottom: 1.5em;
+  }
+  .psar_returnpage .order-table tfoot tr:last-child th,
+  .psar_returnpage .order-table tfoot tr:last-child td {
+    border-top: 1px solid #1f2021;
+    font-weight: normal;
+    padding-top: 1.5em;
+    padding-bottom: 1em;
+    font-size: 0.8125em;
+    letter-spacing: 0.15em;
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .psar_returnpage .order-table td,
+  .order-table th {
+    padding: 0.5em 1em;
+  }
+  .psar_returnpage .order-table tbody th,
+  .psar_returnpage .order-table tfoot th {
+    font-family: Arapey, serif;
+    font-weight: normal;
+    text-transform: none;
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+  .psar_returnpage .order-table tr th:first-child {
+    padding-left: 0;
+  }
+  .psar_returnpage .order-table tr th:last-child,
+  .psar_returnpage .order-table tr td:last-child {
+    padding-right: 0;
+  }
+  .psar_returnpage .order-table tr:first-child th::after,
+  .psar_returnpage .order-table tr:first-child td::after {
+    display: none;
+  }
+  @media screen and (min-width: 591px) {
+    .psar_returnpage .order-table tbody tr: first-child th, .order-table tbody tr: first-child td {
+      padding-top: 1.25em;
+    }
+    .psar_returnpage .order-table tbody tr:last-child th,
+    .psar_returnpage .order-table tbody tr:last-child td {
+      padding-bottom: 1.25em;
+    }
+    .psar_returnpage .order-table tfoot tr td,
+    .psar_returnpage .order-table tfoot tr th {
+      vertical-align: bottom;
+    }
+  }
+  @media screen and (max-width: 590px) {
+    .psar_returnpage .order-table {
+      border: 0;
+    }
+    .psar_returnpage .order-table thead {
+      display: none;
+    }
+    .psar_returnpage .order-table th,
+    .order-table td {
+      float: left;
+      clear: left;
+      width: 100%;
+      text-align: right;
+      padding: 0.5rem 0;
+      border: 0;
+      margin: 0;
+    }
+    .psar_returnpage .order-table th::before,
+    .psar_returnpage .order-table td::before {
+      content: attr(data-label);
+      float: left;
+      text-align: left;
+      padding-right: 2em;
+      max-width: 80%;
+    }
+    .psar_returnpage .order-table tbody th::before,
+    .psar_returnpage .order-table tbody td::before {
+      font-size: 0.8125em;
+      letter-spacing: 0.15em;
+      font-family: Montserrat, sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .psar_returnpage .order-table tbody tr td:last-child {
+      padding-bottom: 1.5em;
+    }
+  }
+  @media screen and (max-width: 590px) {
+    .psar_returnpage .order-table__product {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0378/8826/2283/t/3/assets/style.css?v=13627615322811393188 ; media=all */
+
+@media all {
+  .psar_returnpage main div {
+    text-align: center;
+    color: #353539;
+  }
+}
+/*! CSS Used fontfaces */
+
+@font-face{font-family:Montserrat;font-weight:600;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.7a3c341961dc23aaabcc116124b80f2a7abec1a2.woff2?&hmac=b92922e1683cc0012e34c7bf8312b5012a94a53fc8c072e1f67c774308ea2f2a") format("woff2"),
+  url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.2c97c1a692c63ad09ab0635cb73b1939c5f417c0.woff?&hmac=8669c660350573f86fd9449c033c017f38297b619f249ae75e106208f636918b") format("woff");
+
+}
+@font-face{font-family:Montserrat;font-weight:900;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n9.ddaed62de62f3d3d87e64f4d0463dca05fc9c8e4.woff2?&hmac=b67d8128c9fe24e8ae2d92ed67e2a363d0b4e977e559b1f1ff89bd9af63b96fa") format("woff2"),
+  url("https://fonts.shopifycdn.com/montserrat/montserrat_n9.85cc5f32e331fc9b3a109639b08869c64782e161.woff?&hmac=0dad9ff79b5ae51db870d72b5df326b1aa49c5d45832fbf06c7bb8a1bdae96ee") format("woff");
+
+}
+@font-face{font-family:Montserrat;font-weight:600;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.7a3c341961dc23aaabcc116124b80f2a7abec1a2.woff2?&hmac=b92922e1683cc0012e34c7bf8312b5012a94a53fc8c072e1f67c774308ea2f2a") format("woff2"),
+  url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.2c97c1a692c63ad09ab0635cb73b1939c5f417c0.woff?&hmac=8669c660350573f86fd9449c033c017f38297b619f249ae75e106208f636918b") format("woff");
+
+}
+@font-face{font-family:Montserrat;font-weight:900;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n9.ddaed62de62f3d3d87e64f4d0463dca05fc9c8e4.woff2?&hmac=b67d8128c9fe24e8ae2d92ed67e2a363d0b4e977e559b1f1ff89bd9af63b96fa") format("woff2"),
+  url("https://fonts.shopifycdn.com/montserrat/montserrat_n9.85cc5f32e331fc9b3a109639b08869c64782e161.woff?&hmac=0dad9ff79b5ae51db870d72b5df326b1aa49c5d45832fbf06c7bb8a1bdae96ee") format("woff");
+
+}
+@font-face{font-family:Arapey;font-weight:400;font-style:normal;src:url("https://fonts.shopifycdn.com/arapey/arapey_n4.2d2866546ce54f39e3baf69f5d944e54b2e0771b.woff2?&hmac=5e984782c9a5779b38a9252cabb94652343a66369566d28d02efa67be50007e1") format("woff2"),
+  url("https://fonts.shopifycdn.com/arapey/arapey_n4.a5bf746bd7b4646dec7a42e0f36c7afe1b3785db.woff?&hmac=da78a26ecfad5d5239dd0ba4f02f6d2289d1c9a4f4d4df4373e5aa19c9650572") format("woff");
+
+}
+@font-face{font-family:Arapey;font-weight:400;font-style:italic;src:url("https://fonts.shopifycdn.com/arapey/arapey_i4.76b9c74110c86df9446495f3b98d8ff62e62229e.woff2?&hmac=5ea2449a9d733566f7d53fba6f6b72afa059dea3edbb5fbcacc885050eeb9f46") format("woff2"),
+  url("https://fonts.shopifycdn.com/arapey/arapey_i4.54a950529ca14266fc22b37574a97a78f656c7bb.woff?&hmac=b70acc49502d135dbafcf4e22c3eaff2e4eac5bc8d919cf9d8da4f68126ff157") format("woff");
+
+}
+@font-face{font-family:Arapey;font-weight:400;font-style:normal;src:url("https://fonts.shopifycdn.com/arapey/arapey_n4.2d2866546ce54f39e3baf69f5d944e54b2e0771b.woff2?&hmac=5e984782c9a5779b38a9252cabb94652343a66369566d28d02efa67be50007e1") format("woff2"),
+  url("https://fonts.shopifycdn.com/arapey/arapey_n4.a5bf746bd7b4646dec7a42e0f36c7afe1b3785db.woff?&hmac=da78a26ecfad5d5239dd0ba4f02f6d2289d1c9a4f4d4df4373e5aa19c9650572") format("woff");
+
+}
+@font-face{font-family:Arapey;font-weight:400;font-style:italic;src:url("https://fonts.shopifycdn.com/arapey/arapey_i4.76b9c74110c86df9446495f3b98d8ff62e62229e.woff2?&hmac=5ea2449a9d733566f7d53fba6f6b72afa059dea3edbb5fbcacc885050eeb9f46") format("woff2"),
+  url("https://fonts.shopifycdn.com/arapey/arapey_i4.54a950529ca14266fc22b37574a97a78f656c7bb.woff?&hmac=b70acc49502d135dbafcf4e22c3eaff2e4eac5bc8d919cf9d8da4f68126ff157") format("woff");
+}
+/* New Css add */
+.psar_push--large--one-twelfth{
+  left: 8.333%;
+}
+.psar_large--five-sixths{
+  width: 83.333%;
+}
+.psar_grid, .psar_grid--rev, .psar_grid--full, .psar_grid-uniform {
+  margin: 0 auto;
+
+}
+.psar_grid__item{
+  padding-left: 30px;
+}
+
+.psar_section-header{
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.psar_text-center{
+  text-align:center;
+}
+.psar_push--large--one-tenth{
+  /*   left: 10%; */
+  left:0;
+
+}
+.psar_large--four-fifths{
+  /*   width: 80%; */
+  width:none;
+}
+.psar_rte--nomargin{
+  margin-bottom: 0;
+}
+.psar_rte {
+  margin-bottom: 15px;
+}
+.psar_message_error{
+  display:none;
+  width:50%; 
+  margin: 10px auto;
+}
+
+.psar_step2{
+  display:none;
+  margin:0 auto;
+  box-shadow: 5px 2px 12px 8px #ccc;
+  background:red;
+}
+
+.psar_table-wrap--order {
+  background-color: #f6f6f6;
+  padding: 1rem;
+}
+.psar_step3{
+  display:none; 
+  width: none;
+  margin: 0 auto;
+}
+.psar_order-table{
+  background:red;
+}
+
+.psar_thankyou-heading{
+  text-align:center; 
+  padding-top: 30px;
+  font-size:30px;
+}
+
+.psar_thankyou-subheading{
+  padding-top: 0;
+  padding-right: 20px; 
+  padding-left: 50px;
+}
+
+
+div#CustomerLoginForm, form#psar_order_form_a {
+    max-width: 500px;
+    background: #f5f5f5;
+    padding: 30px;
+    margin:0 auto;
+}
+
+div#CustomerLoginForm label{text-align:left}
+
+div#CustomerLoginForm  input.btn.btn--full{width:100%}
+.psar_returnpage .psar-main .psar-button-login{border:none}
+.section-header { margin-bottom: 30px!important;}
+.section-header h1, header.psar_section-header h1 {font-size: 26px; text-transform: capitalize;}
+form#psar_order_form_c{padding:30px;}
+form#psar_order_form_c table{background:#fff}
+form#psar_order_form_c th {
+    font-size: 13px!important;
+    text-transform: capitalize;
+}
+form#psar_order_form_c th:nth-child(odd) { 
+  background: #b2eef9;
+}
+
+form#psar_order_form_c th:nth-child(even) { 
+  background: #eaeaea;
+}
+
+div#psar_step{   
+  width: 65%!important;
+  box-shadow: 0px 5px 7px 1px #d2d2d2!important;
+  background: #fdf4f4!important;
+  border: 1px solid #e4dada!important;
+}
+.psar_returnpage{
+  margin: 0 auto;
+  text-align:center;
+}
+.psar_returnpage textarea{
+    border: 1px solid #1f2021;
+  }
+.psar_returnpage .psar_step3 .thankyou_p{
+      display: flex;
+      align-items: center;
+    }
+.psar_returnpage .psar_number1 {
+    background: none;
+    vertical-align: middle;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 40px;
+    border: 3px solid;
+    min-height: 40px !important;
+    min-width: 40px !important;
+    display: block !important;
+    line-height: 34px;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 0px !important;
+	border-color: #4E9797;
+}  
+.psar_returnpage  span {
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    display: inline-block;
+  }
+.psar_returnpage div {
+    text-align: center;
+    color: #353539;
+    margin: 0 auto;
+    max-width: 618px;
+    width:100%;
+  } 
+
+.psar-return-table{
+	display:block; 
+  width:50%;
+  box-shadow:1px 5px 6px 4px #ccc;
+  background: #f6f6f6;
+  margin:0 auto;
+}
+.psar_footer-contact{
+	padding: 30px;
+}
+.psar_loader_wrapper {
+  position: relative;
+}
+.psar_loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,0.1);
+  width: 100% !important;
+  height: 100%;
+}
+.psar_loader img {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: calc(50% - 25px);
+  top: calc(50% - 25px);
+}
+.psar_loader.active{
+  display: block !important;
+}

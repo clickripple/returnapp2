@@ -1,9 +1,9 @@
 import requests
 import json
 
-API_KEY = "8444dc202d58790ecb461d128a8a2b86"
-SHARED_SECRET = "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"
-API_VERSION = "2020-07"
+API_KEY = "1c86866d8c638b28da99bbdfe3cd5fce"
+SHARED_SECRET = "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"
+API_VERSION = "2021-01"
 
 class product:
     # return_reason functional code start (get return_reason by product category) #
